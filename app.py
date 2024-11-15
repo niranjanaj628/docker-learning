@@ -1,0 +1,33 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+# Health Check route
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'})
+
+# Data route
+@app.route('/data', methods=['GET'])
+def get_data():
+    data = [
+        {'id': 1, 'name': 'Item 1'},
+        {'id': 2, 'name': 'Item 2'},
+        {'id': 3, 'name': 'Item 3'}
+    ]
+    return jsonify(data)
+
+# docker route
+@app.route('/docker',methods=['GET'])
+def docker():
+    message='Docker is running!'
+    return message
+
+# Kubernetes route (something playful)
+@app.route('/new', methods=['GET'])
+def kubernetes_playful():
+    message = 'Welcome to the world of Docker!'
+    return message
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
